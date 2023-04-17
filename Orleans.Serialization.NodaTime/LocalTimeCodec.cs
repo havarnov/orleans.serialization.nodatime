@@ -22,14 +22,14 @@ public class LocalTimeCodec:  IFieldCodec<LocalTime>
     {
         ReferenceCodec.MarkValueField(writer.Session);
         writer.WriteFieldHeader(fieldIdDelta, expectedType, typeof(LocalTime), WireType.Fixed64);
-        writer.WriteInt64(value.TickOfDay);
+        writer.WriteInt64(value.NanosecondOfDay);
     }
 
     public LocalTime ReadValue<TInput>(ref Reader<TInput> reader, Field field)
     {
         ReferenceCodec.MarkValueField(reader.Session);
         field.EnsureWireType(WireType.Fixed64);
-        var tickOfDay = reader.ReadInt64();
-        return LocalTime.FromTicksSinceMidnight(tickOfDay);
+        var value = reader.ReadInt64();
+        return LocalTime.FromNanosecondsSinceMidnight(value);
     }
 }

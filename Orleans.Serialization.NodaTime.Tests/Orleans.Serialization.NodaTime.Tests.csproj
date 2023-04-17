@@ -24,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\orleans.serialization.nodatime\orleans.serialization.nodatime.csproj" />
+      <ProjectReference Include="..\Orleans.Serialization.NodaTime\Orleans.Serialization.NodaTime.csproj" />
     </ItemGroup>
 
 </Project>

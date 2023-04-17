@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "orleans.serialization.nodatime", "orleans.serialization.nodatime\orleans.serialization.nodatime.csproj", "{7746C7DB-9CA6-4687-BBE1-FCC711790A49}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orleans.Serialization.NodaTime", "Orleans.Serialization.NodaTime\Orleans.Serialization.NodaTime.csproj", "{7746C7DB-9CA6-4687-BBE1-FCC711790A49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "orleans.serialization.nodatime.tests", "orleans.serialization.nodatime.tests\orleans.serialization.nodatime.tests.csproj", "{C74C43B7-AFE0-4251-8993-08965658DE95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orleans.Serialization.NodaTime.Tests", "Orleans.Serialization.NodaTime.Tests\Orleans.Serialization.NodaTime.Tests.csproj", "{C74C43B7-AFE0-4251-8993-08965658DE95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

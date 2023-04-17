@@ -11,6 +11,6 @@ public class LocalTimeCopier : IDeepCopier<LocalTime>
 {
     public LocalTime DeepCopy(LocalTime input, CopyContext context)
     {
-        return LocalTime.FromTicksSinceMidnight(input.TickOfDay);
+        return input;
     }
 }

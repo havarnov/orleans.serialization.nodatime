@@ -45,8 +45,9 @@ public class DateTimeZoneCodec: IFieldCodec<DateTimeZone?>, IGeneralizedCodec
             var reference = reader.ReadVarUInt32();
             if (reference != 0)
             {
-                throw new NotImplementedException();
+                ThrowInvalidReference(reference);
             }
+
             return null;
         }
 
@@ -59,8 +60,7 @@ public class DateTimeZoneCodec: IFieldCodec<DateTimeZone?>, IGeneralizedCodec
                ?? DateTimeZoneProviders.Bcl[id];
     }
 
-    public bool IsSupportedType(Type type)
-    {
-        return typeof(DateTimeZone).IsAssignableFrom(type);
-    }
+    public bool IsSupportedType(Type type) => typeof(DateTimeZone).IsAssignableFrom(type);
+
+    private static void ThrowInvalidReference(uint reference) => throw new ReferenceNotFoundException(typeof(DateTimeZone), reference);
 }

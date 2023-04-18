@@ -25,5 +25,7 @@ public class DateTimeZoneCodecTests : FieldCodecTester<DateTimeZone?, DateTimeZo
     protected override DateTimeZone[] TestValues => new[]
     {
         DateTimeZoneProviders.Tzdb["Europe/Oslo"],
+        DateTimeZoneProviders.Bcl["Europe/Oslo"],
+        DateTimeZoneProviders.Bcl.GetSystemDefault(),
     };
 }

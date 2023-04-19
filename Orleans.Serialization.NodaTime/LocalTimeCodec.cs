@@ -21,15 +21,15 @@ public class LocalTimeCodec:  IFieldCodec<LocalTime>
         where TBufferWriter : IBufferWriter<byte>
     {
         ReferenceCodec.MarkValueField(writer.Session);
-        writer.WriteFieldHeader(fieldIdDelta, expectedType, typeof(LocalTime), WireType.Fixed64);
-        writer.WriteInt64(value.NanosecondOfDay);
+        writer.WriteFieldHeader(fieldIdDelta, expectedType, typeof(LocalTime), WireType.VarInt);
+        writer.WriteVarInt64(value.NanosecondOfDay);
     }
 
     public LocalTime ReadValue<TInput>(ref Reader<TInput> reader, Field field)
     {
         ReferenceCodec.MarkValueField(reader.Session);
-        field.EnsureWireType(WireType.Fixed64);
-        var value = reader.ReadInt64();
+        field.EnsureWireType(WireType.VarInt);
+        var value = reader.ReadVarInt64();
         return LocalTime.FromNanosecondsSinceMidnight(value);
     }
 }

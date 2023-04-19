@@ -3,6 +3,8 @@ name: .NET CI
 on:
   workflow_dispatch:
   push:
+    tags:
+      - 'release/*'
   pull_request:
     branches:
       - master
@@ -24,6 +26,6 @@ jobs:
           run: dotnet pack **/Orleans.Serialization.NodaTime.csproj
 
         - name: nuget push
-          if: startsWith(github.ref, 'refs/tags/release-')
+          if: startsWith(github.ref, 'refs/tags/release/')
           run: nuget push **/Orleans.Serialization.NodaTime*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
 

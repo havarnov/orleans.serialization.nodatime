@@ -17,5 +17,7 @@ public class LocalTimeCodecTests : FieldCodecTester<LocalTime, LocalTimeCodec>
     {
         LocalTime.Midnight,
         LocalTime.Noon,
+        LocalTime.MaxValue,
+        LocalTime.MinValue,
     };
 }

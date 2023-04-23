@@ -16,5 +16,7 @@ public class LocalTimeCopierTests : CopierTester<LocalTime, LocalTimeCopier>
     {
         LocalTime.Midnight,
         LocalTime.Noon,
+        LocalTime.MaxValue,
+        LocalTime.MinValue,
     };
 }

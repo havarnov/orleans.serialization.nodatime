@@ -11,7 +11,7 @@ The library should implement codecs and copiers for the following types:
 - [ ] OffsetDateTime
 - [ ] OffsetDate
 - [ ] OffsetTime
-- [ ] DateTimeZone (draft implementation)
+- [x] DateTimeZone
 - [ ] ZonedDateTime
 - [ ] Duration
 - [ ] Period

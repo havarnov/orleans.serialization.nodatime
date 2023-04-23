@@ -3,7 +3,7 @@ Orleans.Serialization.NodaTime is a library that provides Orleans serialization 
 The library should implement codecs and copiers for the following types:
 
 - [x] Instant
-- [ ] Offset
+- [x] Offset
 - [ ] CalendarSystem
 - [ ] LocalDateTime
 - [ ] LocalDate

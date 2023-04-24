@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Extensions.DependencyInjection;
 using NodaTime;
 using Orleans.Serialization.Cloning;
@@ -7,14 +8,13 @@ using Xunit.Abstractions;
 
 namespace Orleans.Serialization.NodaTime.Tests;
 
-public class DateTimeZoneCodecTests : FieldCodecTester<DateTimeZone?, DateTimeZoneCodec>
+public class DateTimeZoneCodecTests(ITestOutputHelper output)
+    : FieldCodecTester<DateTimeZone?, DateTimeZoneCodec>(output)
 {
-    public DateTimeZoneCodecTests(ITestOutputHelper output) : base(output)
-    {
-    }
-
     protected override void Configure(ISerializerBuilder builder)
     {
+        ArgumentNullException.ThrowIfNull(builder);
+
         builder.Services.AddSingleton<IGeneralizedCopier, DateTimeZoneCopier>();
         builder.Services.AddSingleton<IGeneralizedCodec, DateTimeZoneCodec>();
         base.Configure(builder);

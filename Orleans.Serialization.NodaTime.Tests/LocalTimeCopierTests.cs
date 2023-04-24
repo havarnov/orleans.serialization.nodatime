@@ -4,12 +4,9 @@ using Xunit.Abstractions;
 
 namespace Orleans.Serialization.NodaTime.Tests;
 
-public class LocalTimeCopierTests : CopierTester<LocalTime, LocalTimeCopier>
+public class LocalTimeCopierTests(ITestOutputHelper output)
+    : CopierTester<LocalTime, LocalTimeCopier>(output)
 {
-    public LocalTimeCopierTests(ITestOutputHelper output) : base(output)
-    {
-    }
-
     protected override LocalTime CreateValue() => LocalTime.Noon;
 
     protected override LocalTime[] TestValues => new[]

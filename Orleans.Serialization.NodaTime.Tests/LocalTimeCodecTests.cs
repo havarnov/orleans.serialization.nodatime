@@ -4,13 +4,9 @@ using Xunit.Abstractions;
 
 namespace Orleans.Serialization.NodaTime.Tests;
 
-public class LocalTimeCodecTests : FieldCodecTester<LocalTime, LocalTimeCodec>
+public class LocalTimeCodecTests(ITestOutputHelper output)
+    : FieldCodecTester<LocalTime, LocalTimeCodec>(output)
 {
-    public LocalTimeCodecTests(ITestOutputHelper output)
-        : base(output)
-    {
-    }
-
     protected override LocalTime CreateValue() => LocalTime.Noon;
 
     protected override LocalTime[] TestValues => new[]

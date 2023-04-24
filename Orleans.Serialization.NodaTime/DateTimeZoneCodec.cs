@@ -24,14 +24,16 @@ public class DateTimeZoneCodec: IFieldCodec<DateTimeZone?>, IGeneralizedCodec
         DateTimeZone? value)
         where TBufferWriter : IBufferWriter<byte>
     {
-        // If the value is null, write it as the null reference.
-        if (value is null)
+        if (ReferenceCodec.TryWriteReferenceField(ref writer, fieldIdDelta, expectedType, value))
         {
-            ReferenceCodec.WriteNullReference(ref writer, fieldIdDelta);
             return;
         }
 
-        ReferenceCodec.MarkValueField(writer.Session);
+        if (value is null)
+        {
+            throw new NotImplementedException();
+        }
+
         writer.WriteFieldHeader(fieldIdDelta, expectedType, typeof(DateTimeZone), WireType.LengthPrefixed);
         var bytes = Encoding.UTF8.GetBytes(value.Id);
         writer.WriteVarUInt32((uint)(bytes.Length + 1));
@@ -41,36 +43,29 @@ public class DateTimeZoneCodec: IFieldCodec<DateTimeZone?>, IGeneralizedCodec
 
     public DateTimeZone? ReadValue<TInput>(ref Reader<TInput> reader, Field field)
     {
-        // This will only be true if the value is null.
         if (field.WireType == WireType.Reference)
         {
-            ReferenceCodec.MarkValueField(reader.Session);
-            var reference = reader.ReadVarUInt32();
-            if (reference != 0)
-            {
-                ThrowInvalidReference(reference);
-            }
-
-            return null;
+            return ReferenceCodec.ReadReference<DateTimeZone?, TInput>(ref reader, field);
         }
 
-        ReferenceCodec.MarkValueField(reader.Session);
         field.EnsureWireType(WireType.LengthPrefixed);
         var length = reader.ReadVarUInt32();
         var buffer = reader.ReadBytes(length);
         var id = Encoding.UTF8.GetString(buffer.AsSpan(1));
-        return buffer[0] switch
+        var value = buffer[0] switch
         {
             1 => DateTimeZoneProviders.Tzdb[id],
             2 => DateTimeZoneProviders.Bcl[id],
             _ => throw new UnreachableException(
                 "Only 1 and 2 are valid values to indicate DateTimeZoneProvider.")
         };
+
+        ReferenceCodec.RecordObject(reader.Session, value);
+        return value;
     }
 
-    public bool IsSupportedType(Type type) =>
-        typeof(DateTimeZone).IsAssignableFrom(type)
+    public bool IsSupportedType(Type? type) =>
+        type is not null
+        && typeof(DateTimeZone).IsAssignableFrom(type)
         && typeof(DateTimeZone).Assembly.FullName == type.Assembly.FullName;
-
-    private static void ThrowInvalidReference(uint reference) => throw new ReferenceNotFoundException(typeof(DateTimeZone), reference);
 }

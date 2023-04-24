@@ -4,12 +4,9 @@ using Xunit.Abstractions;
 
 namespace Orleans.Serialization.NodaTime.Tests;
 
-public class OffsetCopierTests: CopierTester<Offset, OffsetCopier>
+public class OffsetCopierTests(ITestOutputHelper output)
+    : CopierTester<Offset, OffsetCopier>(output)
 {
-    public OffsetCopierTests(ITestOutputHelper output) : base(output)
-    {
-    }
-
     protected override Offset CreateValue() => Offset.Zero;
 
     protected override Offset[] TestValues => new[]

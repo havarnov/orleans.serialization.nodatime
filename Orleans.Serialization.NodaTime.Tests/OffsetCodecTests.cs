@@ -4,12 +4,9 @@ using Xunit.Abstractions;
 
 namespace Orleans.Serialization.NodaTime.Tests;
 
-public class OffsetCodecTests: FieldCodecTester<Offset, OffsetCodec>
+public class OffsetCodecTests(ITestOutputHelper output)
+    : FieldCodecTester<Offset, OffsetCodec>(output)
 {
-    public OffsetCodecTests(ITestOutputHelper output) : base(output)
-    {
-    }
-
     protected override Offset CreateValue() => Offset.Zero;
 
     protected override Offset[] TestValues => new[]

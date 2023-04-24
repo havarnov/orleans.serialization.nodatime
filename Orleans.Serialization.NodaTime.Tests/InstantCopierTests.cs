@@ -4,12 +4,9 @@ using Xunit.Abstractions;
 
 namespace Orleans.Serialization.NodaTime.Tests;
 
-public class InstantCopierTests:  CopierTester<Instant, InstantCopier>
+public class InstantCopierTests(ITestOutputHelper output)
+    : CopierTester<Instant, InstantCopier>(output)
 {
-    public InstantCopierTests(ITestOutputHelper output) : base(output)
-    {
-    }
-
     protected override Instant CreateValue() =>
         SystemClock.Instance.GetCurrentInstant();
 

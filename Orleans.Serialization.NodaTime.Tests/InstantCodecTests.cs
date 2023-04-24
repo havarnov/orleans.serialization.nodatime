@@ -4,12 +4,9 @@ using Xunit.Abstractions;
 
 namespace Orleans.Serialization.NodaTime.Tests;
 
-public class InstantCodecTests: FieldCodecTester<Instant, InstantCodec>
+public class InstantCodecTests(ITestOutputHelper output)
+    : FieldCodecTester<Instant, InstantCodec>(output)
 {
-    public InstantCodecTests(ITestOutputHelper output) : base(output)
-    {
-    }
-
     protected override Instant CreateValue() =>
         SystemClock.Instance.GetCurrentInstant();
 

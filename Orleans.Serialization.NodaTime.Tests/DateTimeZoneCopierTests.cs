@@ -4,15 +4,17 @@ using Xunit.Abstractions;
 
 namespace Orleans.Serialization.NodaTime.Tests;
 
-public class DateTimeZoneCopierTests(ITestOutputHelper output) : CopierTester<DateTimeZone?, DateTimeZoneCopier>(output)
+public class DateTimeZoneCopierTests(ITestOutputHelper output)
+    : CopierTester<DateTimeZone?, DateTimeZoneCopier>(output)
 {
     protected override bool IsImmutable => true;
 
     protected override DateTimeZone? CreateValue() => DateTimeZone.Utc;
 
-    protected override DateTimeZone?[] TestValues => new[]
-    {
+    protected override DateTimeZone?[] TestValues =>
+    [
+        null,
         DateTimeZone.Utc,
-        DateTimeZoneProviders.Tzdb["Europe/Oslo"],
-    };
+        DateTimeZoneProviders.Tzdb["Europe/Oslo"]
+    ];
 }

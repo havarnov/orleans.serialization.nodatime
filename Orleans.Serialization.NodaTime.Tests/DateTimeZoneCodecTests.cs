@@ -22,10 +22,11 @@ public class DateTimeZoneCodecTests(ITestOutputHelper output)
 
     protected override DateTimeZone CreateValue() => DateTimeZone.Utc;
 
-    protected override DateTimeZone[] TestValues => new[]
-    {
+    protected override DateTimeZone?[] TestValues =>
+    [
+        null,
         DateTimeZoneProviders.Tzdb["Europe/Oslo"],
         DateTimeZoneProviders.Bcl["Europe/Oslo"],
-        DateTimeZoneProviders.Bcl.GetSystemDefault(),
-    };
+        DateTimeZoneProviders.Bcl.GetSystemDefault()
+    ];
 }

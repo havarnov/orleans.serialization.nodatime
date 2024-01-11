@@ -29,10 +29,8 @@ public class DateTimeZoneCodec: IFieldCodec<DateTimeZone?>, IGeneralizedCodec
             return;
         }
 
-        if (value is null)
-        {
-            throw new NotImplementedException();
-        }
+        // 'value' can't be null since ReferenceCodec.TryWriteReferenceField would always be able to write a 'null' field.
+        Debug.Assert(value is not null);
 
         writer.WriteFieldHeader(fieldIdDelta, expectedType, typeof(DateTimeZone), WireType.LengthPrefixed);
         var bytes = Encoding.UTF8.GetBytes(value.Id);

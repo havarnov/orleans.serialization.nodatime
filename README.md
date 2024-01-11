@@ -4,17 +4,15 @@ The library should implement codecs and copiers for the following types:
 
 - [x] Instant
 - [x] Offset
-- [x] CalendarSystem*
+- [x] CalendarSystem
 - [ ] LocalDateTime
 - [ ] LocalDate
 - [x] LocalTime
 - [ ] OffsetDateTime
 - [ ] OffsetDate
 - [ ] OffsetTime
-- [x] DateTimeZone*
+- [x] DateTimeZone
 - [ ] ZonedDateTime
 - [ ] Duration
 - [ ] Period
 - [ ] Interval
-
-\* Doesn't currently handle null reference.

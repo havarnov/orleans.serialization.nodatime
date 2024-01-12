@@ -8,9 +8,9 @@ The library should implement codecs and copiers for the following types:
 - [x] LocalDateTime
 - [x] LocalDate
 - [x] LocalTime
-- [ ] OffsetDateTime
-- [ ] OffsetDate
-- [ ] OffsetTime
+- [x] OffsetDateTime
+- [x] OffsetDate
+- [x] OffsetTime
 - [x] DateTimeZone
 - [ ] ZonedDateTime
 - [ ] Duration

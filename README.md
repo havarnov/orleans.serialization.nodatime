@@ -5,7 +5,7 @@ The library should implement codecs and copiers for the following types:
 - [x] Instant
 - [x] Offset
 - [x] CalendarSystem
-- [ ] LocalDateTime
+- [x] LocalDateTime
 - [x] LocalDate
 - [x] LocalTime
 - [ ] OffsetDateTime

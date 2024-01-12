@@ -28,7 +28,6 @@ public class LocalDateTimeCodec : IFieldCodec<LocalDateTime>
         _localDateCodec.WriteField(ref writer, 0, typeof(LocalDate), value.Date);
         _localTimeCodec.WriteField(ref writer, 1, typeof(LocalTime), value.TimeOfDay);
         writer.WriteEndObject();
-
     }
 
     public LocalDateTime ReadValue<TInput>(ref Reader<TInput> reader, Field field)

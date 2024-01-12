@@ -10,41 +10,39 @@ using Orleans.Serialization.WireProtocol;
 namespace Orleans.Serialization.NodaTime;
 
 /// <summary>
-/// Serializer for <see cref="Instant"/>.
+/// Codec for <see cref="LocalDate"/>.
 /// </summary>
 [RegisterSerializer]
-public class InstantCodec : IFieldCodec<Instant>
+public class LocalDateCodec : IFieldCodec<LocalDate>
 {
     public void WriteField<TBufferWriter>(
         ref Writer<TBufferWriter> writer,
         uint fieldIdDelta,
         Type expectedType,
-        Instant value)
+        LocalDate value)
         where TBufferWriter : IBufferWriter<byte>
     {
+        var valueAsString = LocalDatePattern.FullRoundtrip.Format(value);
+        var bytes = Encoding.UTF8.GetBytes(valueAsString);
+
         ReferenceCodec.MarkValueField(writer.Session);
-        // We must serialize an Instant as a serialized string with the ExtendedIso pattern
-        // to be able to send it with maximum precision,
-        // see https://nodatime.org/2.0.x/api/NodaTime.Text.InstantPattern.html#NodaTime_Text_InstantPattern_ExtendedIso.
-        var instantStr = InstantPattern.ExtendedIso.Format(value);
-        writer.WriteFieldHeader(fieldIdDelta, expectedType, typeof(Instant), WireType.LengthPrefixed);
-        var bytes = Encoding.UTF8.GetBytes(instantStr);
+        writer.WriteFieldHeader(fieldIdDelta, expectedType, typeof(LocalDate), WireType.LengthPrefixed);
         writer.WriteVarUInt32((uint)bytes.Length);
         writer.Write(bytes);
     }
 
-    public Instant ReadValue<TInput>(ref Reader<TInput> reader, Field field)
+    public LocalDate ReadValue<TInput>(ref Reader<TInput> reader, Field field)
     {
         ReferenceCodec.MarkValueField(reader.Session);
         field.EnsureWireType(WireType.LengthPrefixed);
         var length = reader.ReadVarUInt32();
         var buffer = reader.ReadBytes(length);
-        var instantStr = Encoding.UTF8.GetString(buffer);
-        var parseResult = InstantPattern.ExtendedIso.Parse(instantStr);
+        var valueAsStr = Encoding.UTF8.GetString(buffer);
+        var parseResult = LocalDatePattern.FullRoundtrip.Parse(valueAsStr);
         if (!parseResult.Success)
         {
             throw new NodaTimeCodecException(
-                $"Couldn't parse {instantStr} as {nameof(Instant)} with pattern {InstantPattern.ExtendedIso.PatternText}.",
+                $"Couldn't parse {valueAsStr} as {nameof(LocalDate)} with pattern {LocalDatePattern.FullRoundtrip.PatternText}.",
                 parseResult.Exception);
         }
 

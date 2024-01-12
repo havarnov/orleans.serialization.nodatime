@@ -6,7 +6,7 @@ The library should implement codecs and copiers for the following types:
 - [x] Offset
 - [x] CalendarSystem
 - [ ] LocalDateTime
-- [ ] LocalDate
+- [x] LocalDate
 - [x] LocalTime
 - [ ] OffsetDateTime
 - [ ] OffsetDate

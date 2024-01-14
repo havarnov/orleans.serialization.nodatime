@@ -15,4 +15,4 @@ The library should implement codecs and copiers for the following types:
 - [x] ZonedDateTime
 - [x] Duration
 - [x] Period
-- [ ] Interval
+- [x] Interval

@@ -16,3 +16,4 @@ The library should implement codecs and copiers for the following types:
 - [x] Duration
 - [x] Period
 - [x] Interval
+- [x] DateInterval

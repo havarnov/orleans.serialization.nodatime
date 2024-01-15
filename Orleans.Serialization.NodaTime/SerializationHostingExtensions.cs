@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Orleans.Serialization.NodaTime;
@@ -6,6 +7,8 @@ public static class SerializationHostingExtensions
 {
     public static ISerializerBuilder AddNodaTimeSerializers(this ISerializerBuilder serializerBuilder)
     {
+        ArgumentNullException.ThrowIfNull(serializerBuilder);
+
         // Instant
         serializerBuilder.Configure(config => config.Copiers.Add(typeof(InstantCopier)));
         serializerBuilder.Services.AddSingleton<InstantCopier>();

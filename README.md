@@ -1,6 +1,6 @@
 Orleans.Serialization.NodaTime is a library that provides Orleans serialization functionality for NodaTime.
 
-The library should implement codecs and copiers for the following types:
+The library implements codecs and copiers for the following types:
 
 - [x] Instant
 - [x] Offset
@@ -17,3 +17,21 @@ The library should implement codecs and copiers for the following types:
 - [x] Period
 - [x] Interval
 - [x] DateInterval
+
+```csharp
+await Host
+    .CreateDefaultBuilder()
+    .ConfigureServices((ctx, services) =>
+    {
+        services.AddOrleans(builder =>
+        {
+            builder.Services.AddSerializer(serializerBuilder =>
+            {
+                serializerBuilder.AddNodaTimeSerializers();
+            })
+        })
+    })
+    .UseConsoleLifetime()
+    .Build()
+    .RunAsync();
+```

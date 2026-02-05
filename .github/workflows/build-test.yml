@@ -20,14 +20,17 @@ jobs:
 
         - uses: actions/setup-dotnet@v3
           with:
-            dotnet-version: '8.0.x'
+            dotnet-version: |
+              8.0.x
+              9.0.x
+              10.0.x
 
-        - run: dotnet test 
+        - run: dotnet test
 
         - name: dotnet pack
           run: dotnet pack **/Orleans.Serialization.NodaTime.csproj
 
         - name: nuget push
           if: startsWith(github.ref, 'refs/tags/release/')
-          run: nuget push **/Orleans.Serialization.NodaTime*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
+          run: dotnet nuget push **/Orleans.Serialization.NodaTime*.nupkg --source 'https://api.nuget.org/v3/index.json' --api-key ${{secrets.NUGET_API_KEY}}
 
